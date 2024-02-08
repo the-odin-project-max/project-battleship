@@ -115,12 +115,35 @@ export default class Gameboard {
             shipHit.hit();
             this.#board[indexHit] = 'hit';
             this.#hits++;
-            return 'hit';
+            return true;
         } else {
             this.#misses++;
             this.#missedShots.push(indexHit);
             this.#board[indexHit] = 'missed';
-            return 'missed';
+            return false;
         }
+    }
+
+    getBoard() {
+        return this.#board;
+    }
+
+    display() {
+        let board = '';
+        for (let i = 0; i < this.#board_size ** 2; i++) {
+            if (i % this.#board_size === 0) {
+                board += '\n';
+            }
+            if (this.#board[i] === 'hit') {
+                board += 'X ';
+            } else if (this.#board[i] === 'missed') {
+                board += 'O ';
+            } else if (this.#board[i] === null) {
+                board += '. ';
+            } else {
+                board += 'S ';
+            }
+        }
+        return board;
     }
 }

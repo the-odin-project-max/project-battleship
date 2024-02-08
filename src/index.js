@@ -1,17 +1,13 @@
-import { listContacts } from "./pages/page_1.js";
-import "./css/style.css";
+import Gameboard from "./scripts/Gameboard.js";
 
-// const contentDiv = document.createElement("div");
-// contentDiv.id = "content";
-// document.body.appendChild(contentDiv);
+let gameboard = new Gameboard(10);
 
-const homePageButton = document.createElement("button");
-homePageButton.textContent = "Home Page";
-homePageButton.addEventListener("click", () => {
-	listContacts();
-});
+gameboard.placeShip(4, 0, "horizontal");
+gameboard.placeShip(4, 10, "vertical");
+gameboard.placeShip(3, 11, "vertical");
 
-document.body.prepend(homePageButton);
+gameboard.receiveAttack(0);
+gameboard.receiveAttack(12);
 
-listContacts();
-
+console.log(gameboard.getHits()); // 1
+console.log(gameboard.display());
